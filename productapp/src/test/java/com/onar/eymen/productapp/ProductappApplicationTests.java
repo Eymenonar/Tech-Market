@@ -1,10 +1,10 @@
-package com.onar.eymen.commonjpa;
+package com.onar.eymen.productapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CommonJpaApplicationTests {
+class ProductappApplicationTests {
 
   @Test
   void contextLoads() {}

@@ -1,0 +1,34 @@
+package com.onar.eymen.productapp.service;
+
+import static com.onar.eymen.common.core.response.builder.ResponseBuilder.createSuccessResponse;
+
+import com.onar.eymen.common.core.advice.exception.ProductAlreadyExist;
+import com.onar.eymen.common.core.constant.Messages;
+import com.onar.eymen.common.core.response.success.SuccessResponse;
+import com.onar.eymen.productapp.model.dto.request.ProductCreateRequest;
+import com.onar.eymen.productapp.model.dto.response.ProductResponse;
+import com.onar.eymen.productapp.repository.ProductsRepository;
+import com.onar.eymen.productapp.service.domain.ProductsDomainService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
+public class ProductsService {
+  private final ProductsRepository repository;
+  private final ProductsDomainService domainService;
+
+  @Transactional
+  public SuccessResponse<ProductResponse> createProduct(ProductCreateRequest request) {
+    if (request.sku() != null && repository.existsBySku(request.sku()))
+      throw new ProductAlreadyExist();
+
+    var product = domainService.buildProducts(request);
+    var newProduct = repository.save(product);
+    var response = ProductResponse.from(newProduct);
+
+    return createSuccessResponse(response, Messages.Product.SAVED);
+  }
+}

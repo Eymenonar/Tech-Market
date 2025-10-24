@@ -21,6 +21,13 @@ public class BaseExceptionHandler {
     return buildResponseEntity(new ErrorResponse<>(exception));
   }
 
+  @ExceptionHandler(TechMarketException.class)
+  public ResponseEntity<?> handleTechMarketException(TechMarketException ex) {
+    var error =
+        new ErrorResponse<>(ex.getType(), ex.getCode(), ex.getMessage(), ex.getStatus(), ex);
+    return buildResponseEntity(error);
+  }
+
   @ExceptionHandler(IllegalArgumentException.class)
   public ResponseEntity<ErrorResponse<?>> handleIllegalArgumentException(
       IllegalArgumentException exception) {
