@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AuditorProviderConfig {
-    @Bean
-    @ConditionalOnMissingBean(AuditorProvider.class)
-    public AuditorProvider defaultAuditorProvider() {
-        return ()->"system";
-    }
+  @Bean
+  @ConditionalOnMissingBean(AuditorProvider.class)
+  public AuditorProvider defaultAuditorProvider() {
+    return () -> "system";
+  }
 }

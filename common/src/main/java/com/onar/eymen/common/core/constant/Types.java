@@ -46,4 +46,10 @@ public final class Types {
     public static final String INVALID_VERIFICATION_TOKEN =
         "ERROR: INVALID_VERIFICATION_TOKEN_EXCEPTION";
   }
+
+  public static final class Product {
+    private Product() {}
+
+    public static final String PRODUCT_ALREADY_EXIST = "ERROR: PRODUCT_ALREADY_EXIST_EXCEPTION";
+  }
 }

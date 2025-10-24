@@ -26,4 +26,10 @@ public final class Codes {
   public static final String ENTITY_NOT_FOUND = "2900";
   public static final String ENTITY_EXISTS = "3000";
   public static final String NO_SUCH_ELEMENT = "3100";
+
+  public static final class Product {
+    private Product() {}
+
+    public static final String PRODUCT_ALREADY_EXIST = "5000";
+  }
 }

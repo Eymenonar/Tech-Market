@@ -13,6 +13,11 @@ public final class Messages {
     private Entity() {}
   }
 
+  public static final class Product {
+    public static final String PRODUCT_ALREADY_EXIST = "Böyle bir ürün bulunmaktadır.";
+    public static final String SAVED = "Ürün başarıyla kaydedildi.";
+  }
+
   public static final class Entities {
     public static final String NOT_FOUND = "Herhangi bir kayıt bulunamadı.";
     public static final String FOUND = "Kayıtlar listelendi.";
