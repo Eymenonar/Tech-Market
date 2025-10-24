@@ -11,7 +11,7 @@ public interface BaseRepository<T, ID> extends JpaRepository<T, ID> {
   @Transactional
   @Query(
       "update #{#entityName} e set e.audit.isActive = false, e.audit.deletedAt = current_timestamp, e.audit.deletedBy = ?1 where e.id = ?2")
-  void softDeleteById(String deletedBy, ID id);
+  void softDeleteById(Long deletedBy, ID id);
 
   @Modifying
   @Transactional

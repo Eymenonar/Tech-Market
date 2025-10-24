@@ -24,4 +24,18 @@ public class ProductsController {
   public SuccessResponse<ProductResponse> create(@RequestBody @Valid ProductCreateRequest request) {
     return service.createProduct(request);
   }
+
+  @GetMapping("/find")
+  @ResponseStatus(HttpStatus.OK)
+  @Operation(summary = "Belirtilen ürünü getirir.")
+  public SuccessResponse<ProductResponse> getProductById(Long id) {
+    return service.findById(id);
+  }
+
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @Operation(summary = "Ürünü sil")
+  public void softDeleteProduct(@PathVariable Long id) {
+    service.softDeleteProduct(id);
+  }
 }

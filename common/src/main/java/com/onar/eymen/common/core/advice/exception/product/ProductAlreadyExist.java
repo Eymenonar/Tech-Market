@@ -1,4 +1,4 @@
-package com.onar.eymen.common.core.advice.exception;
+package com.onar.eymen.common.core.advice.exception.product;
 
 import com.onar.eymen.common.core.advice.TechMarketException;
 import com.onar.eymen.common.core.constant.Codes;

@@ -10,6 +10,6 @@ public class AuditorProviderConfig {
   @Bean
   @ConditionalOnMissingBean(AuditorProvider.class)
   public AuditorProvider defaultAuditorProvider() {
-    return () -> "system";
+    return () -> null;
   }
 }

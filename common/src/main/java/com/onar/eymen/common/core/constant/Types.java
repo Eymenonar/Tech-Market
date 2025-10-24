@@ -51,5 +51,6 @@ public final class Types {
     private Product() {}
 
     public static final String PRODUCT_ALREADY_EXIST = "ERROR: PRODUCT_ALREADY_EXIST_EXCEPTION";
+    public static final String PRODUCT_NOT_EXIST = "ERROR: PRODUCT_NOT_EXIST_EXCEPTION";
   }
 }

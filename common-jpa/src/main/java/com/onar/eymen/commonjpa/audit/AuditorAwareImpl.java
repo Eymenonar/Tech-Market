@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class AuditorAwareImpl implements AuditorAware<String> {
+public class AuditorAwareImpl implements AuditorAware<Long> {
 
   private final AuditorProvider auditorProvider;
 
   @Override
-  public Optional<String> getCurrentAuditor() {
+  public Optional<Long> getCurrentAuditor() {
     return Optional.ofNullable(auditorProvider.getCurrentAuditor());
   }
 }
