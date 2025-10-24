@@ -31,5 +31,6 @@ public final class Codes {
     private Product() {}
 
     public static final String PRODUCT_ALREADY_EXIST = "5000";
+    public static final String PRODUCT_NOT_EXIST = "5001";
   }
 }

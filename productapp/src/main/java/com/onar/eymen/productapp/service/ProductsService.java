@@ -2,9 +2,11 @@ package com.onar.eymen.productapp.service;
 
 import static com.onar.eymen.common.core.response.builder.ResponseBuilder.createSuccessResponse;
 
-import com.onar.eymen.common.core.advice.exception.ProductAlreadyExist;
+import com.onar.eymen.common.core.advice.exception.product.ProductAlreadyExist;
+import com.onar.eymen.common.core.advice.exception.product.ProductNotFoundException;
 import com.onar.eymen.common.core.constant.Messages;
 import com.onar.eymen.common.core.response.success.SuccessResponse;
+import com.onar.eymen.commonjpa.audit.AuditorProvider;
 import com.onar.eymen.productapp.model.dto.request.ProductCreateRequest;
 import com.onar.eymen.productapp.model.dto.response.ProductResponse;
 import com.onar.eymen.productapp.repository.ProductsRepository;
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductsService {
   private final ProductsRepository repository;
   private final ProductsDomainService domainService;
+  private final AuditorProvider auditorProvider;
 
   @Transactional
   public SuccessResponse<ProductResponse> createProduct(ProductCreateRequest request) {
@@ -30,5 +33,19 @@ public class ProductsService {
     var response = ProductResponse.from(newProduct);
 
     return createSuccessResponse(response, Messages.Product.SAVED);
+  }
+
+  @Transactional
+  public void softDeleteProduct(Long id) {
+    var product = repository.findById(id);
+    if (product.isEmpty()) throw new ProductNotFoundException();
+    repository.softDeleteById(auditorProvider.getCurrentAuditor(), id);
+  }
+
+  public SuccessResponse<ProductResponse> findById(Long id) {
+    var product = repository.findById(id).orElseThrow(ProductNotFoundException::new);
+    var response = ProductResponse.from(product);
+
+    return createSuccessResponse(response, Messages.Product.PRODUCT_FOUND);
   }
 }

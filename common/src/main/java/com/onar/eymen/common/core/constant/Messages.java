@@ -16,6 +16,8 @@ public final class Messages {
   public static final class Product {
     public static final String PRODUCT_ALREADY_EXIST = "Böyle bir ürün bulunmaktadır.";
     public static final String SAVED = "Ürün başarıyla kaydedildi.";
+    public static final String PRODUCT_NOT_FOUND = "Ürün bulunamadı";
+    public static final String PRODUCT_FOUND = "Ürün bulundu";
   }
 
   public static final class Entities {
