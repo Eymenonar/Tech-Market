@@ -8,7 +8,9 @@ import com.onar.eymen.common.core.constant.Messages;
 import com.onar.eymen.common.core.response.success.SuccessResponse;
 import com.onar.eymen.commonjpa.audit.AuditorProvider;
 import com.onar.eymen.productapp.model.dto.request.ProductCreateRequest;
+import com.onar.eymen.productapp.model.dto.request.ProductUpdateRequest;
 import com.onar.eymen.productapp.model.dto.response.ProductResponse;
+import com.onar.eymen.productapp.model.entity.Products;
 import com.onar.eymen.productapp.repository.ProductsRepository;
 import com.onar.eymen.productapp.service.domain.ProductsDomainService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ProductsService {
   private final ProductsRepository repository;
-  private final ProductsDomainService domainService;
   private final AuditorProvider auditorProvider;
+  private final ProductsDomainService domainService;
 
   @Transactional
   public SuccessResponse<ProductResponse> createProduct(ProductCreateRequest request) {
@@ -42,7 +44,24 @@ public class ProductsService {
     repository.softDeleteById(auditorProvider.getCurrentAuditor(), id);
   }
 
-  public SuccessResponse<ProductResponse> findById(Long id) {
+  @Transactional
+  public SuccessResponse<ProductResponse> updateProduct(Long id, ProductUpdateRequest request) {
+    var product = findById(id);
+    product.setName(request.name());
+    product.setDescription(request.description());
+    product.setPrice(request.price());
+    product.setStockQty(request.stockQty());
+    var updatedProduct = repository.save(product);
+    var response = ProductResponse.from(updatedProduct);
+
+    return createSuccessResponse(response, Messages.Product.UPDATED);
+  }
+
+  public Products findById(Long id) {
+    return repository.findById(id).orElseThrow(ProductNotFoundException::new);
+  }
+
+  public SuccessResponse<ProductResponse> findProduct(Long id) {
     var product = repository.findById(id).orElseThrow(ProductNotFoundException::new);
     var response = ProductResponse.from(product);
 
