@@ -2,6 +2,7 @@ package com.onar.eymen.productapp.controller;
 
 import com.onar.eymen.common.core.response.success.SuccessResponse;
 import com.onar.eymen.productapp.model.dto.request.ProductCreateRequest;
+import com.onar.eymen.productapp.model.dto.request.ProductUpdateRequest;
 import com.onar.eymen.productapp.model.dto.response.ProductResponse;
 import com.onar.eymen.productapp.service.ProductsService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,7 +30,7 @@ public class ProductsController {
   @ResponseStatus(HttpStatus.OK)
   @Operation(summary = "Belirtilen ürünü getirir.")
   public SuccessResponse<ProductResponse> getProductById(Long id) {
-    return service.findById(id);
+    return service.findProduct(id);
   }
 
   @DeleteMapping("/{id}")
@@ -37,5 +38,13 @@ public class ProductsController {
   @Operation(summary = "Ürünü sil")
   public void softDeleteProduct(@PathVariable Long id) {
     service.softDeleteProduct(id);
+  }
+
+  @PostMapping("/update/{id}")
+  @ResponseStatus(HttpStatus.CREATED)
+  @Operation(summary = "Ürünü günceller.")
+  public SuccessResponse<ProductResponse> updateProduct(
+      @PathVariable Long id, @Valid ProductUpdateRequest request) {
+    return service.updateProduct(id, request);
   }
 }
