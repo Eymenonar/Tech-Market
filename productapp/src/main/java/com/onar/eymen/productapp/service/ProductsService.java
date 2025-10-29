@@ -57,7 +57,7 @@ public class ProductsService {
     return createSuccessResponse(response, Messages.Product.UPDATED);
   }
 
-  public Products findById(Long id) {
+  private Products findById(Long id) {
     return repository.findById(id).orElseThrow(ProductNotFoundException::new);
   }
 

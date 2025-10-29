@@ -47,6 +47,21 @@ public final class Types {
         "ERROR: INVALID_VERIFICATION_TOKEN_EXCEPTION";
   }
 
+  public static final class User {
+    private User() {}
+
+    public static final String BREACHED_PASSWORD = "ERROR: USER_BREACHED_PASSWORD_EXCEPTION";
+    public static final String OLD_PASSWORD_MISMATCH = "ERROR: OLD_PASSWORD_MISMATCH";
+    public static final String EMAIL_ALREADY_EXISTS = "ERROR: USER_EMAIL_ALREADY_EXISTS_EXCEPTION";
+    public static final String NOT_FOUND = "ERROR: USER_NOT_FOUND_EXCEPTION";
+  }
+
+  public static final class Role {
+    private Role() {}
+
+    public static final String NOT_FOUND = "ERROR: ROLE_NOT_FOUND_EXCEPTION";
+  }
+
   public static final class Product {
     private Product() {}
 
