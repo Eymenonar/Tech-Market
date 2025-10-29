@@ -8,20 +8,17 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
-
-    <artifactId>common-jpa</artifactId>
+    <groupId>com.onar.eymen</groupId>
+    <artifactId>user-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Common-jpa</name>
-    <description>Common-jpa</description>
+    <name>user-service</name>
+    <description>user-service</description>
     <url/>
     <licenses>
         <license/>
     </licenses>
     <developers>
-        <developer>
-            <name>Eymen Onar</name>
-            <email>eymenonar123@gmail.com</email>
-        </developer>
+        <developer/>
     </developers>
     <scm>
         <connection/>
@@ -31,24 +28,43 @@
     </scm>
     <properties>
         <java.version>21</java.version>
+        <jsonwebtoken.version>0.12.6</jsonwebtoken.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.onar.eymen</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>common-jpa</artifactId>
             <version>${project.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jsonwebtoken.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jsonwebtoken.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jsonwebtoken.version}</version>
+            <scope>runtime</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

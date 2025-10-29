@@ -26,6 +26,7 @@
         <module>common</module>
         <module>common-jpa</module>
         <module>productapp</module>
+        <module>user-service</module>
     </modules>
 
     <build>
