@@ -5,6 +5,7 @@ import com.onar.eymen.userservice.model.dto.request.ChangePasswordRequest;
 import com.onar.eymen.userservice.model.dto.request.RegisterRequest;
 import com.onar.eymen.userservice.model.dto.request.UpdateProfileRequest;
 import com.onar.eymen.userservice.model.dto.response.UserResponse;
+import com.onar.eymen.userservice.security.domain.UserAuthorizationDomainService;
 import com.onar.eymen.userservice.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -14,6 +15,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,8 +24,9 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Kullanıcı işlemleri")
 public class UserController {
   private final UserService service;
+    private final UserAuthorizationDomainService userAuthorizationDomainService;
 
-  @PostMapping("/register")
+    @PostMapping("/register")
   @ResponseStatus(HttpStatus.CREATED)
   @Operation(summary = "Yeni bir kullanıcı kaydı oluşturur.")
   @SecurityRequirements()
@@ -41,6 +44,7 @@ public class UserController {
 
   @PutMapping("/{id}/update")
   @ResponseStatus(HttpStatus.OK)
+  @PreAuthorize("@userAuthorizationDomainService.isCurrentUser(#id)")
   @Operation(summary = "Kullanıcı profilini günceller.")
   @SecurityRequirement(name = "bearerAuth")
   public SuccessResponse<UserResponse> updateUser(

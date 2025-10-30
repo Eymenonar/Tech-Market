@@ -15,6 +15,8 @@ import com.onar.eymen.userservice.repository.UserRepository;
 import com.onar.eymen.userservice.service.domain.UserDomainService;
 import com.onar.eymen.userservice.validator.UserValidator;
 import java.util.List;
+
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,6 +73,16 @@ public class UserService {
 
     return createSuccessResponse(response, Messages.User.PASSWORD_UPDATED);
   }
+
+    public SuccessResponse<UserResponse> getUserByEmail(String email) {
+        var user =
+                repository
+                        .findByEmail(email)
+                        .orElseThrow(UserNotFoundException::new);
+        var response = UserResponse.from(user);
+
+        return createSuccessResponse(response, Messages.User.FOUND);
+    }
 
   private User findById(Long id) {
     return repository.findById(id).orElseThrow(UserNotFoundException::new);
