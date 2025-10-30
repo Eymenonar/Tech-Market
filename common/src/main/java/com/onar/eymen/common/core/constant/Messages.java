@@ -20,6 +20,7 @@ public final class Messages {
     public static final String FOUND = "Kullanıcı bulundu.";
     public static final String SAVED = "Kullanıcı başarıyla kaydedildi.";
     public static final String UPDATED = "Kullanıcı başarıyla güncellendi.";
+    public static final String PASSWORD_UPDATED = "Kullanıcı şifresi başarıyla güncellendi.";
     public static final String DELETED = "Kullanıcı başarıyla silindi.";
     public static final String PASSWORD_REQUIREMENTS =
         "Şifre büyük/küçük harf, rakam ve özel karakter içermelidir.";
@@ -27,6 +28,15 @@ public final class Messages {
         "Şifre güvenli değil, lütfen daha güçlü bir şifre kullanın.";
     public static final String OLD_PASSWORD_MISMATCH = "Eski şifre hatalı.";
     public static final String EMAIL_ALREADY_EXISTS = "Bu email adresi zaten kayıtlı.";
+  }
+
+  public static final class Auth {
+    private Auth() {}
+
+    public static final String INVALID_JWT = "Geçersiz veya süresi dolmuş JWT.";
+    public static final String TOKEN_TYPE_MISMATCH = "Token türü uyuşmuyor.";
+    public static final String LOGIN_SUCCESS = "Başarıyla giriş yapıldı.";
+    public static final String REFRESH_SUCCESS = "Token başarıyla yenilendi.";
   }
 
   public static final class Role {

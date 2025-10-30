@@ -56,6 +56,13 @@ public final class Types {
     public static final String NOT_FOUND = "ERROR: USER_NOT_FOUND_EXCEPTION";
   }
 
+  public static final class Auth {
+    private Auth() {}
+
+    public static final String INVALID_JWT = "ERROR: INVALID_JWT_EXCEPTION";
+    public static final String TOKEN_TYPE_MISMATCH = "ERROR: TOKEN_TYPE_MISMATCH_EXCEPTION";
+  }
+
   public static final class Role {
     private Role() {}
 

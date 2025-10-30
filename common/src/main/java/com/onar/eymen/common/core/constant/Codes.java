@@ -11,8 +11,8 @@ public final class Codes {
   public static final class Product {
     private Product() {}
 
-    public static final String PRODUCT_ALREADY_EXIST = "5000";
-    public static final String PRODUCT_NOT_EXIST = "5001";
+    public static final String PRODUCT_ALREADY_EXIST = "P1000";
+    public static final String PRODUCT_NOT_EXIST = "P1001";
   }
 
   public static final class User {
@@ -22,6 +22,13 @@ public final class Codes {
     public static final String EMAIL_ALREADY_EXISTS = "U1002";
     public static final String OLD_PASSWORD_MISMATCH = "U1004";
     public static final String NOT_FOUND = "U1003";
+  }
+
+  public static final class Auth {
+    private Auth() {}
+
+    public static final String INVALID_JWT = "S1000";
+    public static final String TOKEN_TYPE_MISMATCH = "S1001";
   }
 
   public static final class Role {

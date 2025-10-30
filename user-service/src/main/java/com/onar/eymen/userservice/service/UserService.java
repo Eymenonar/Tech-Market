@@ -1,10 +1,12 @@
 package com.onar.eymen.userservice.service;
 
+import static com.onar.eymen.common.core.response.builder.ResponseBuilder.createNotFoundResponse;
 import static com.onar.eymen.common.core.response.builder.ResponseBuilder.createSuccessResponse;
 
 import com.onar.eymen.common.core.advice.exception.user.UserNotFoundException;
 import com.onar.eymen.common.core.constant.Messages;
 import com.onar.eymen.common.core.response.success.SuccessResponse;
+import com.onar.eymen.userservice.model.dto.request.ChangePasswordRequest;
 import com.onar.eymen.userservice.model.dto.request.RegisterRequest;
 import com.onar.eymen.userservice.model.dto.request.UpdateProfileRequest;
 import com.onar.eymen.userservice.model.dto.response.UserResponse;
@@ -12,6 +14,7 @@ import com.onar.eymen.userservice.model.entity.User;
 import com.onar.eymen.userservice.repository.UserRepository;
 import com.onar.eymen.userservice.service.domain.UserDomainService;
 import com.onar.eymen.userservice.validator.UserValidator;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,6 +51,25 @@ public class UserService {
     var response = UserResponse.from(newUser);
 
     return createSuccessResponse(response, Messages.User.UPDATED);
+  }
+
+  public SuccessResponse<List<UserResponse>> findAllUsers() {
+    var response = repository.findAll().stream().map(UserResponse::from).toList();
+    if (response.isEmpty()) return createNotFoundResponse(Messages.User.NOT_FOUND);
+
+    return createSuccessResponse(response, Messages.User.FOUND);
+  }
+
+  @Transactional
+  public SuccessResponse<UserResponse> changePassword(Long id, ChangePasswordRequest request) {
+    var user = findById(id);
+    validator.validateOldPassword(user, request);
+    validator.validatePasswordDataBreachStatus(request.newPassword());
+    user.setPassword(domainService.encodePassword(request.newPassword()));
+    var newUser = repository.save(user);
+    var response = UserResponse.from(newUser);
+
+    return createSuccessResponse(response, Messages.User.PASSWORD_UPDATED);
   }
 
   private User findById(Long id) {

@@ -4,12 +4,11 @@ server:
 spring:
   application:
     name: user-service
-
   datasource:
-    url: jdbc:postgresql://localhost:5432/techMarket
-    username: postgres
-    password: root
-    driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/techMarket
+      username: postgres
+      password: root
+      driver-class-name: org.postgresql.Driver
   hikari:
     maximum-pool-size: 10
     minimum-idle: 2
@@ -26,12 +25,18 @@ spring:
         format_sql: true
         jdbc.lob.non_contextual_creation: true
         default_schema: product
-    show-sql: false
+      show-sql: false
 
   jackson:
     time-zone: UTC
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
+app:
+  security:
+    jwt:
+      secret: "wn1BXdpdAI2EEO6y48GVdYDR6ULN6ftwNzH29oXE7RoK+UIapSqd89vh947ivVntrQeOlx7ZN1ITp4FlApeLkA=="
+      access-expiration-ms: 3600000
+      refresh-expiration-ms: 86400000
 
 management:
   endpoints:
