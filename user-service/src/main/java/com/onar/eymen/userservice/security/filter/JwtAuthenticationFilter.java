@@ -34,13 +34,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       @NonNull HttpServletResponse response,
       @NonNull FilterChain filterChain)
       throws ServletException, IOException {
-    try {
+
       var token = getBearerTokenFromRequest(request);
       if (token != null) {
         authenticateRequestWithToken(token, request);
       }
-    } catch (Exception ex) {
-    }
+
     filterChain.doFilter(request, response);
   }
 

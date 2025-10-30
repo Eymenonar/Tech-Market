@@ -4,15 +4,11 @@ import com.onar.eymen.common.core.response.success.SuccessResponse;
 import com.onar.eymen.userservice.security.model.dto.request.LoginRequest;
 import com.onar.eymen.userservice.security.model.dto.response.LoginResponse;
 import com.onar.eymen.userservice.service.AuthService;
-import com.onar.eymen.userservice.service.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,11 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
     description = "Kimlik doğrulama ve token yönetimi işlemleri")
 @SecurityRequirements()
 public class AuthController {
-  private final UserService userService;
   private final AuthService service;
 
   @PostMapping("/login")
   public SuccessResponse<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
     return service.login(request.email(), request.password());
+  }
+
+  @PostMapping("/refreshToken")
+  public SuccessResponse<LoginResponse> getRefreshToken(@RequestParam String refreshToken) {
+    return service.tokenRefresh(refreshToken);
   }
 }
