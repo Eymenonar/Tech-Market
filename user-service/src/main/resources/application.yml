@@ -5,9 +5,9 @@ spring:
   application:
     name: user-service
   datasource:
-      url: jdbc:postgresql://localhost:5432/techMarket
-      username: postgres
-      password: root
+      url: ${DB_URL}
+      username: ${DB_USERNAME}
+      password: ${root}
       driver-class-name: org.postgresql.Driver
   hikari:
     maximum-pool-size: 10
@@ -34,7 +34,7 @@ spring:
 app:
   security:
     jwt:
-      secret: "wn1BXdpdAI2EEO6y48GVdYDR6ULN6ftwNzH29oXE7RoK+UIapSqd89vh947ivVntrQeOlx7ZN1ITp4FlApeLkA=="
+      secret: ${JWT_SECRET}
       access-expiration-ms: 3600000
       refresh-expiration-ms: 86400000
 
