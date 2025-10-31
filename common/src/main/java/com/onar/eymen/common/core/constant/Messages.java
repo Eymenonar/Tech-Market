@@ -13,6 +13,25 @@ public final class Messages {
     public static final String PRODUCT_FOUND = "Ürün bulundu";
   }
 
+  public static final class Categories {
+    private Categories() {}
+
+    public static final String CATEGORIES_ALREADY_EXIST = "Böyle bir kategori bulunmaktadır.";
+    public static final String CATEGORY_HAS_SUB_CATEGORIES =
+        "Bu kategorinin alt kategorileri var, önce onları silin veya taşıyın.";
+    public static final String CIRCULAR_REFERENCE = "Döngüsel kategori ilişkisi oluşturulamaz.";
+    public static final String PARENT_CATEGORY_NOT_EXIST = "Alt kategori bulunamadı.";
+    public static final String PARENT_CATEGORY_FOUND = "Alt kategoriler bulundu.";
+    public static final String CATEGORIES_NOT_FOUND = "Kategoriler bulunamadı.";
+    public static final String CATEGORY_SAVED = "Kategori başarıyla kaydedildi.";
+    public static final String CATEGORY_NOT_FOUND = "Kategori bulunamadı.";
+    public static final String CATEGORY_FOUND = "Kategori bulundu.";
+    public static final String CATEGORY_UPDATED = "Kategori başarıyla güncellendi.";
+    public static final String CATEGORIES_FOUND = "Kategoriler bulundu.";
+    public static final String MAIN_CATEGORIES_FOUND = "Ana kategoriler bulundu.";
+    public static final String MAIN_CATEGORIES_NOT_FOUND = "Ana kategoriler bulunanamdı.";
+  }
+
   public static final class User {
     private User() {}
 

@@ -1,4 +1,4 @@
-package com.onar.eymen.productapp.model.dto.response;
+package com.onar.eymen.productapp.model.dto.response.products;
 
 import com.onar.eymen.productapp.model.entity.Products;
 import java.math.BigDecimal;

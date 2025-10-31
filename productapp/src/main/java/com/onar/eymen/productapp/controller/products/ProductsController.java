@@ -1,10 +1,10 @@
-package com.onar.eymen.productapp.controller;
+package com.onar.eymen.productapp.controller.products;
 
 import com.onar.eymen.common.core.response.success.SuccessResponse;
-import com.onar.eymen.productapp.model.dto.request.ProductCreateRequest;
-import com.onar.eymen.productapp.model.dto.request.ProductUpdateRequest;
-import com.onar.eymen.productapp.model.dto.response.ProductResponse;
-import com.onar.eymen.productapp.service.ProductsService;
+import com.onar.eymen.productapp.model.dto.request.products.ProductCreateRequest;
+import com.onar.eymen.productapp.model.dto.request.products.ProductUpdateRequest;
+import com.onar.eymen.productapp.model.dto.response.products.ProductResponse;
+import com.onar.eymen.productapp.service.products.ProductsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

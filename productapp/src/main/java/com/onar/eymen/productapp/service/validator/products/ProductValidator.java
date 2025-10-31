@@ -1,4 +1,4 @@
-package com.onar.eymen.productapp.service.validator;
+package com.onar.eymen.productapp.service.validator.products;
 
 import com.onar.eymen.common.core.advice.exception.product.ProductAlreadyExist;
 import com.onar.eymen.productapp.repository.ProductsRepository;

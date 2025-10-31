@@ -1,9 +1,7 @@
 package com.onar.eymen.productapp.model.entity;
 
 import com.onar.eymen.commonjpa.model.entity.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.*;
 import org.hibernate.annotations.SQLRestriction;
@@ -23,7 +21,7 @@ public class Products extends BaseEntity {
   @Column(name = "description", length = 5000)
   private String description;
 
-  @Column(name = "sku", length = 80) // İş tarafının gördüğü ürün kodu, bağımsızdır.
+  @Column(name = "sku", length = 80)
   private String sku;
 
   @Column(name = "price", nullable = false, precision = 12, scale = 2)
@@ -31,4 +29,8 @@ public class Products extends BaseEntity {
 
   @Column(name = "stock_qty", nullable = false)
   private Integer stockQty = 0;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "category_id")
+  private Categories category;
 }

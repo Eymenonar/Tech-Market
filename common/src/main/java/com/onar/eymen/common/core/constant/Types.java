@@ -75,4 +75,17 @@ public final class Types {
     public static final String PRODUCT_ALREADY_EXIST = "ERROR: PRODUCT_ALREADY_EXIST_EXCEPTION";
     public static final String PRODUCT_NOT_EXIST = "ERROR: PRODUCT_NOT_EXIST_EXCEPTION";
   }
+
+  public static final class Categories {
+    private Categories() {}
+
+    public static final String CATEGORIES_ALREADY_EXIST =
+        "ERROR: CATEGORIES_ALREADY_EXIST_EXCEPTION";
+    public static final String CATEGORY_HAS_SUB_CATEGORIES =
+        "ERROR: CATEGORY_HAS_SUB_CATEGORIES_EXCEPTION";
+    public static final String CIRCULAR_REFERENCE = "ERROR: CIRCULAR_REFERENCE_EXCEPTION";
+    public static final String PARENT_CATEGORY_NOT_EXIST =
+        "ERROR: PARENT_CATEGORY_NOT_EXIST_EXCEPTION";
+    public static final String CATEGORY_NOT_FOUND = "ERROR: CATEGORY_NOT_FOUND_EXCEPTION";
+  }
 }
