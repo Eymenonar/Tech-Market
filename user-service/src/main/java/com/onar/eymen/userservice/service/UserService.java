@@ -6,6 +6,7 @@ import static com.onar.eymen.common.core.response.builder.ResponseBuilder.create
 import com.onar.eymen.common.core.advice.exception.user.UserNotFoundException;
 import com.onar.eymen.common.core.constant.Messages;
 import com.onar.eymen.common.core.response.success.SuccessResponse;
+import com.onar.eymen.commonjpa.audit.AuditorProvider;
 import com.onar.eymen.userservice.model.dto.request.ChangePasswordRequest;
 import com.onar.eymen.userservice.model.dto.request.RegisterRequest;
 import com.onar.eymen.userservice.model.dto.request.UpdateProfileRequest;
@@ -15,8 +16,6 @@ import com.onar.eymen.userservice.repository.UserRepository;
 import com.onar.eymen.userservice.service.domain.UserDomainService;
 import com.onar.eymen.userservice.validator.UserValidator;
 import java.util.List;
-
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +27,7 @@ public class UserService {
   private final RoleService roleService;
   private final UserValidator validator;
   private final UserRepository repository;
+  private final AuditorProvider auditorProvider;
   private final UserDomainService domainService;
 
   @Transactional
@@ -74,15 +74,12 @@ public class UserService {
     return createSuccessResponse(response, Messages.User.PASSWORD_UPDATED);
   }
 
-    public SuccessResponse<UserResponse> getUserByEmail(String email) {
-        var user =
-                repository
-                        .findByEmail(email)
-                        .orElseThrow(UserNotFoundException::new);
-        var response = UserResponse.from(user);
+  public SuccessResponse<UserResponse> getUserByEmail(String email) {
+    var user = repository.findByEmail(email).orElseThrow(UserNotFoundException::new);
+    var response = UserResponse.from(user);
 
-        return createSuccessResponse(response, Messages.User.FOUND);
-    }
+    return createSuccessResponse(response, Messages.User.FOUND);
+  }
 
   private User findById(Long id) {
     return repository.findById(id).orElseThrow(UserNotFoundException::new);

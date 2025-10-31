@@ -1,12 +1,12 @@
 package com.onar.eymen.userservice.security.config;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 import com.onar.eymen.common.core.constant.PublicEndpoints;
 import com.onar.eymen.userservice.security.filter.JwtAuthenticationFilter;
 import com.onar.eymen.userservice.security.handler.CustomAccessDeniedHandler;
 import com.onar.eymen.userservice.security.handler.JwtAuthenticationEntryPoint;
+import com.onar.eymen.userservice.security.properties.CorsProperties;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,20 +22,25 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.password.HaveIBeenPwnedRestApiPasswordChecker;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
 @EnableMethodSecurity
+@EnableConfigurationProperties(CorsProperties.class)
 public class SecurityConfig {
 
+  private final CorsProperties corsProperties;
   private final JwtAuthenticationFilter jwtFilter;
   private final CustomAccessDeniedHandler accessDeniedHandler;
   private final JwtAuthenticationEntryPoint authenticationEntryPoint;
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http.cors(withDefaults())
+    http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
         .csrf(AbstractHttpConfigurer::disable)
         .sessionManagement(
             session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -51,11 +56,25 @@ public class SecurityConfig {
               exception.accessDeniedHandler(accessDeniedHandler);
             })
         .formLogin(AbstractHttpConfigurer::disable)
-        .httpBasic(AbstractHttpConfigurer::disable)
-        .anonymous(AbstractHttpConfigurer::disable);
+        .httpBasic(AbstractHttpConfigurer::disable);
     http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
     return http.build();
+  }
+
+  @Bean
+  public CorsConfigurationSource corsConfigurationSource() {
+    var config = new CorsConfiguration();
+    config.setMaxAge(corsProperties.maxAgeSeconds());
+    config.setAllowedOrigins(corsProperties.allowedOrigins());
+    config.setAllowedMethods(corsProperties.allowedMethods());
+    config.setAllowedHeaders(corsProperties.allowedHeaders());
+    config.setAllowCredentials(corsProperties.allowCredentials());
+
+    var source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", config);
+
+    return source;
   }
 
   @Bean

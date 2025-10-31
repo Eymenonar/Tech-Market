@@ -35,10 +35,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       @NonNull FilterChain filterChain)
       throws ServletException, IOException {
 
-      var token = getBearerTokenFromRequest(request);
-      if (token != null) {
-        authenticateRequestWithToken(token, request);
-      }
+    var token = getBearerTokenFromRequest(request);
+    if (token != null) {
+      authenticateRequestWithToken(token, request);
+    }
 
     filterChain.doFilter(request, response);
   }

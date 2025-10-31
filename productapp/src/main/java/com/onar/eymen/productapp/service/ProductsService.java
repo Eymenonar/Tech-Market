@@ -1,8 +1,8 @@
 package com.onar.eymen.productapp.service;
 
+import static com.onar.eymen.common.core.response.builder.ResponseBuilder.createNotFoundResponse;
 import static com.onar.eymen.common.core.response.builder.ResponseBuilder.createSuccessResponse;
 
-import com.onar.eymen.common.core.advice.exception.product.ProductAlreadyExist;
 import com.onar.eymen.common.core.advice.exception.product.ProductNotFoundException;
 import com.onar.eymen.common.core.constant.Messages;
 import com.onar.eymen.common.core.response.success.SuccessResponse;
@@ -13,6 +13,8 @@ import com.onar.eymen.productapp.model.dto.response.ProductResponse;
 import com.onar.eymen.productapp.model.entity.Products;
 import com.onar.eymen.productapp.repository.ProductsRepository;
 import com.onar.eymen.productapp.service.domain.ProductsDomainService;
+import com.onar.eymen.productapp.service.validator.ProductValidator;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,15 +23,21 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ProductsService {
+  private final ProductValidator validator;
   private final ProductsRepository repository;
   private final AuditorProvider auditorProvider;
   private final ProductsDomainService domainService;
 
+  public SuccessResponse<List<ProductResponse>> getAllProducts() {
+    var response = repository.findAll().stream().map(ProductResponse::from).toList();
+    if (response.isEmpty()) return createNotFoundResponse(Messages.Product.PRODUCT_NOT_FOUND);
+
+    return createSuccessResponse(response, Messages.Product.PRODUCT_FOUND);
+  }
+
   @Transactional
   public SuccessResponse<ProductResponse> createProduct(ProductCreateRequest request) {
-    if (request.sku() != null && repository.existsBySku(request.sku()))
-      throw new ProductAlreadyExist();
-
+    validator.validateUniqueSku(request.sku());
     var product = domainService.buildProducts(request);
     var newProduct = repository.save(product);
     var response = ProductResponse.from(newProduct);
