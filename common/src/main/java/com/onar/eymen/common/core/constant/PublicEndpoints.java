@@ -5,6 +5,7 @@ public final class PublicEndpoints {
     "/api-docs/**",
     "/swagger-ui/**",
     "/api/auth/**",
+    "/api/user/register",
     "/v3/api-docs/**",
     "/swagger-resources/**",
     "/webjars/**",

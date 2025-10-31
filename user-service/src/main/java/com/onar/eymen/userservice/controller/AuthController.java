@@ -2,6 +2,7 @@ package com.onar.eymen.userservice.controller;
 
 import com.onar.eymen.common.core.response.success.SuccessResponse;
 import com.onar.eymen.userservice.security.model.dto.request.LoginRequest;
+import com.onar.eymen.userservice.security.model.dto.request.RefreshTokenRequest;
 import com.onar.eymen.userservice.security.model.dto.response.LoginResponse;
 import com.onar.eymen.userservice.service.AuthService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
@@ -26,7 +27,7 @@ public class AuthController {
   }
 
   @PostMapping("/refreshToken")
-  public SuccessResponse<LoginResponse> getRefreshToken(@RequestParam String refreshToken) {
-    return service.tokenRefresh(refreshToken);
+  public SuccessResponse<LoginResponse> getRefreshToken(@RequestBody RefreshTokenRequest request) {
+    return service.tokenRefresh(request.refreshToken());
   }
 }

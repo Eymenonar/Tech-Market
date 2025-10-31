@@ -24,7 +24,7 @@ spring:
       hibernate:
         format_sql: true
         jdbc.lob.non_contextual_creation: true
-        default_schema: product
+        default_schema: auth
       show-sql: false
 
   jackson:

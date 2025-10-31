@@ -8,6 +8,7 @@ import com.onar.eymen.productapp.service.ProductsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,13 @@ public class ProductsController {
   @Operation(summary = "Belirtilen ürünü getirir.")
   public SuccessResponse<ProductResponse> getProductById(Long id) {
     return service.findProduct(id);
+  }
+
+  @GetMapping("/findAll")
+  @ResponseStatus(HttpStatus.OK)
+  @Operation(summary = "Tüm ürünleri getirir.")
+  public SuccessResponse<List<ProductResponse>> getAllProducts() {
+    return service.getAllProducts();
   }
 
   @DeleteMapping("/{id}")
