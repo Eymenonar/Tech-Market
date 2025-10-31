@@ -1,6 +1,6 @@
-package com.onar.eymen.productapp.service.domain;
+package com.onar.eymen.productapp.service.domain.products;
 
-import com.onar.eymen.productapp.model.dto.request.ProductCreateRequest;
+import com.onar.eymen.productapp.model.dto.request.products.ProductCreateRequest;
 import com.onar.eymen.productapp.model.entity.Products;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

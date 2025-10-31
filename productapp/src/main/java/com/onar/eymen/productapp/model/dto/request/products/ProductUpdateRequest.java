@@ -1,4 +1,4 @@
-package com.onar.eymen.productapp.model.dto.request;
+package com.onar.eymen.productapp.model.dto.request.products;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;

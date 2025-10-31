@@ -15,6 +15,16 @@ public final class Codes {
     public static final String PRODUCT_NOT_EXIST = "P1001";
   }
 
+  public static final class Categories {
+    private Categories() {}
+
+    public static final String CATEGORIES_ALREADY_EXIST = "C1000";
+    public static final String CATEGORY_HAS_SUB_CATEGORIES = "C1001";
+    public static final String CIRCULAR_REFERENCE = "C1002";
+    public static final String PARENT_CATEGORY_NOT_EXIST = "C1003";
+    public static final String CATEGORY_NOT_FOUND = "C1004";
+  }
+
   public static final class User {
     private User() {}
 
