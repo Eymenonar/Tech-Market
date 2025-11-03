@@ -3,6 +3,7 @@ package com.onar.eymen.productapp.service.products;
 import static com.onar.eymen.common.core.response.builder.ResponseBuilder.createNotFoundResponse;
 import static com.onar.eymen.common.core.response.builder.ResponseBuilder.createSuccessResponse;
 
+import com.onar.eymen.common.core.advice.exception.categories.CategoryNotFoundException;
 import com.onar.eymen.common.core.advice.exception.product.ProductNotFoundException;
 import com.onar.eymen.common.core.constant.Messages;
 import com.onar.eymen.common.core.response.success.SuccessResponse;
@@ -11,6 +12,7 @@ import com.onar.eymen.productapp.model.dto.request.products.ProductCreateRequest
 import com.onar.eymen.productapp.model.dto.request.products.ProductUpdateRequest;
 import com.onar.eymen.productapp.model.dto.response.products.ProductResponse;
 import com.onar.eymen.productapp.model.entity.Products;
+import com.onar.eymen.productapp.repository.CategoriesRepository;
 import com.onar.eymen.productapp.repository.ProductsRepository;
 import com.onar.eymen.productapp.service.domain.products.ProductsDomainService;
 import com.onar.eymen.productapp.service.validator.products.ProductValidator;
@@ -27,6 +29,7 @@ public class ProductsService {
   private final ProductsRepository repository;
   private final AuditorProvider auditorProvider;
   private final ProductsDomainService domainService;
+    private final CategoriesRepository categoriesRepository;
 
   public SuccessResponse<List<ProductResponse>> getAllProducts() {
     var response = repository.findAll().stream().map(ProductResponse::from).toList();
@@ -38,6 +41,7 @@ public class ProductsService {
   @Transactional
   public SuccessResponse<ProductResponse> createProduct(ProductCreateRequest request) {
     validator.validateUniqueSku(request.sku());
+      validator.validateCategoryExists(request.categoryId());
     var product = domainService.buildProducts(request);
     var newProduct = repository.save(product);
     var response = ProductResponse.from(newProduct);
@@ -55,10 +59,22 @@ public class ProductsService {
   @Transactional
   public SuccessResponse<ProductResponse> updateProduct(Long id, ProductUpdateRequest request) {
     var product = findById(id);
+      validator.validateCategoryExists(request.categoryId());
     product.setName(request.name());
     product.setDescription(request.description());
     product.setPrice(request.price());
     product.setStockQty(request.stockQty());
+
+      if (request.categoryId() != null) {
+          var category =
+                  categoriesRepository
+                          .findById(request.categoryId())
+                          .orElseThrow(CategoryNotFoundException::new);
+          product.setCategory(category);
+      } else {
+          product.setCategory(null);
+      }
+
     var updatedProduct = repository.save(product);
     var response = ProductResponse.from(updatedProduct);
 

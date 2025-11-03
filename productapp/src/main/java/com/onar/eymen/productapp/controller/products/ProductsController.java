@@ -27,10 +27,10 @@ public class ProductsController {
     return service.createProduct(request);
   }
 
-  @GetMapping("/find")
+    @GetMapping("/find/{id}")
   @ResponseStatus(HttpStatus.OK)
   @Operation(summary = "Belirtilen ürünü getirir.")
-  public SuccessResponse<ProductResponse> getProductById(Long id) {
+    public SuccessResponse<ProductResponse> getProductById(@PathVariable Long id) {
     return service.findProduct(id);
   }
 

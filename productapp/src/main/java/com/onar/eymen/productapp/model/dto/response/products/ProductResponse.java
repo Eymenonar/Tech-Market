@@ -11,6 +11,8 @@ public record ProductResponse(
     String sku,
     BigDecimal price,
     Integer stockQty,
+    Long categoryId,
+    String categoryName,
     boolean isActive,
     LocalDateTime createdAt) {
   public static ProductResponse from(Products product) {
@@ -21,6 +23,8 @@ public record ProductResponse(
         product.getSku(),
         product.getPrice(),
         product.getStockQty(),
+            product.getCategory() != null ? product.getCategory().getId() : null,
+            product.getCategory() != null ? product.getCategory().getName() : null,
         product.getAudit().isActive(),
         product.getAudit().getCreatedAt());
   }
