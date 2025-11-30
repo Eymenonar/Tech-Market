@@ -13,6 +13,7 @@ public final class Codes {
 
     public static final String PRODUCT_ALREADY_EXIST = "P1000";
     public static final String PRODUCT_NOT_EXIST = "P1001";
+    public static final String INSUFFICIENT_STOCK = "P1002";
   }
 
   public static final class Categories {

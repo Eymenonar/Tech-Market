@@ -12,5 +12,4 @@ public record ProductUpdateRequest(
     @Size(max = 5000) String description,
     @NotNull(message = "Ürün fiyatı boş bırakılamaz.") @DecimalMin(value = "0.00") BigDecimal price,
     @NotNull(message = "Ürün stoğu boş bırakılamaz.") @PositiveOrZero Integer stockQty,
-    Long categoryId) {
-}
+    Long categoryId) {}

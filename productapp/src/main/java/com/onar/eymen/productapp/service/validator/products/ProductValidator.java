@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ProductValidator {
   private final ProductsRepository repository;
-    private final CategoriesRepository categoriesRepository;
+  private final CategoriesRepository categoriesRepository;
 
   public void validateUniqueSku(String sku) {
     if (repository.existsBySku(sku)) {
@@ -19,9 +19,9 @@ public class ProductValidator {
     }
   }
 
-    public void validateCategoryExists(Long categoryId) {
-        if (categoryId != null && !categoriesRepository.existsById(categoryId)) {
-            throw new CategoryNotFoundException();
-        }
+  public void validateCategoryExists(Long categoryId) {
+    if (categoryId != null && !categoriesRepository.existsById(categoryId)) {
+      throw new CategoryNotFoundException();
     }
+  }
 }

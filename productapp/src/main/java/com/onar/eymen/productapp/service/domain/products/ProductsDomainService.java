@@ -10,25 +10,25 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class ProductsDomainService {
-    private final CategoriesRepository categoriesRepository;
+  private final CategoriesRepository categoriesRepository;
 
   public Products buildProducts(ProductCreateRequest request) {
-      var product =
-              Products.builder()
-                      .name(request.name())
-                      .description(request.description())
-                      .sku(request.sku())
-                      .price(request.price())
-                      .stockQty(request.stockQty())
-                      .build();
+    var product =
+        Products.builder()
+            .name(request.name())
+            .description(request.description())
+            .sku(request.sku())
+            .price(request.price())
+            .stockQty(request.stockQty())
+            .build();
 
-      if (request.categoryId() != null) {
-          var category =
-                  categoriesRepository
-                          .findById(request.categoryId())
-                          .orElseThrow(CategoryNotFoundException::new);
-          product.setCategory(category);
-      }
-      return product;
+    if (request.categoryId() != null) {
+      var category =
+          categoriesRepository
+              .findById(request.categoryId())
+              .orElseThrow(CategoryNotFoundException::new);
+      product.setCategory(category);
+    }
+    return product;
   }
 }

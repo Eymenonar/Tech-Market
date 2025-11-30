@@ -74,6 +74,7 @@ public final class Types {
 
     public static final String PRODUCT_ALREADY_EXIST = "ERROR: PRODUCT_ALREADY_EXIST_EXCEPTION";
     public static final String PRODUCT_NOT_EXIST = "ERROR: PRODUCT_NOT_EXIST_EXCEPTION";
+    public static final String INSUFFICIENT_STOCK = "ERROR: INSUFFICIENT_STOCK_EXCEPTION";
   }
 
   public static final class Categories {

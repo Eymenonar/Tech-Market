@@ -15,4 +15,14 @@
   <component name="ProjectRootManager" version="2" languageLevel="JDK_24" default="true" project-jdk-name="24" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
+  <component name="com.github.lipiridi.spotless.applier.ui.settings.ModuleSettingsState">
+    <option name="selectedModules">
+      <list>
+        <option value="common-jpa" />
+        <option value="common" />
+        <option value="user-service" />
+        <option value="productapp" />
+      </list>
+    </option>
+  </component>
 </project>
