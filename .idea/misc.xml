@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/productapp/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/user-service/pom.xml" />
+        <option value="$PROJECT_DIR$/order-service/pom.xml" />
       </list>
     </option>
   </component>
@@ -20,6 +21,7 @@
       <list>
         <option value="common-jpa" />
         <option value="common" />
+        <option value="order-service" />
         <option value="user-service" />
         <option value="productapp" />
       </list>

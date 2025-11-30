@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="common-jpa" />
         <module name="user-service" />
+        <module name="order-service" />
         <module name="common" />
         <module name="productapp" />
       </profile>
@@ -18,6 +19,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="common" options="-parameters" />
       <module name="common-jpa" options="-parameters" />
+      <module name="order-service" options="-parameters" />
       <module name="productapp" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
