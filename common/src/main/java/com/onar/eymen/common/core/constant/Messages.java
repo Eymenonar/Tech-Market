@@ -11,6 +11,7 @@ public final class Messages {
     public static final String UPDATED = "Ürün başarıyla güncellendi";
     public static final String PRODUCT_NOT_FOUND = "Ürün bulunamadı";
     public static final String PRODUCT_FOUND = "Ürün bulundu";
+    public static final String INSUFFICIENT_STOCK = "Ürün için yeterli stok bulunmamaktadır.";
   }
 
   public static final class Categories {

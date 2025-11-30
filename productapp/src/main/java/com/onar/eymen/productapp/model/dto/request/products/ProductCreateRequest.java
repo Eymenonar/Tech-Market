@@ -13,5 +13,4 @@ public record ProductCreateRequest(
     @Size(max = 80) String sku,
     @NotNull @DecimalMin(value = "0.00") BigDecimal price,
     @PositiveOrZero Integer stockQty,
-    Long categoryId) {
-}
+    Long categoryId) {}

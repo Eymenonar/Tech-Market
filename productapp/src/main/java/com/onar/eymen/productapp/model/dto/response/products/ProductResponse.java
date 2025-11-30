@@ -23,8 +23,8 @@ public record ProductResponse(
         product.getSku(),
         product.getPrice(),
         product.getStockQty(),
-            product.getCategory() != null ? product.getCategory().getId() : null,
-            product.getCategory() != null ? product.getCategory().getName() : null,
+        product.getCategory() != null ? product.getCategory().getId() : null,
+        product.getCategory() != null ? product.getCategory().getName() : null,
         product.getAudit().isActive(),
         product.getAudit().getCreatedAt());
   }
